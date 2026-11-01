@@ -1,0 +1,32 @@
+# Azure Container Apps Deployment Specification
+kind: containerapp
+location: eastus
+name: dermai-platform
+resourceGroup: dermai-rg
+type: Microsoft.App/containerApps
+properties:
+  managedEnvironmentId: /subscriptions/<SUBSCRIPTION_ID>/resourceGroups/dermai-rg/providers/Microsoft.App/managedEnvironments/dermai-env
+  configuration:
+    ingress:
+      external: true
+      targetPort: 80
+      transport: auto
+  template:
+    containers:
+      - name: dermai-frontend
+        image: <ACR_NAME>.azurecr.io/dermai-frontend:latest
+        resources:
+          cpu: 0.5
+          memory: 1.0Gi
+      - name: dermai-backend
+        image: <ACR_NAME>.azurecr.io/dermai-backend:latest
+        env:
+          - name: PORT
+            value: "8000"
+        resources:
+          cpu: 1.0
+          memory: 2.0Gi
+    scale:
+      minReplicas: 1
+      maxReplicas: 5
+
