@@ -383,6 +383,23 @@ export default function AnalysisDetailPage({ analysis, onBack, onNavigateTempora
                   style={{ width: `${confidence}%` }}
                 />
               </div>
+
+              {/* Explainable Decision Fusion Badges */}
+              <div className="mt-2.5 flex flex-wrap items-center gap-2 text-[11px] text-slate-500">
+                <span className="px-2 py-0.5 rounded-md bg-slate-100 font-mono text-slate-700 border border-slate-200">
+                  {analysis?.model_source || "PyTorch MobileNetV3 Checkpoint"}
+                </span>
+                {analysis?.neural_confidence && (
+                  <span className="px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-700 border border-indigo-200">
+                    Deep CNN: {(analysis.neural_confidence * 100).toFixed(1)}%
+                  </span>
+                )}
+                {analysis?.abcde_prior_confidence && (
+                  <span className="px-2 py-0.5 rounded-md bg-sky-50 text-sky-700 border border-sky-200">
+                    Clinical Priors: {(analysis.abcde_prior_confidence * 100).toFixed(1)}%
+                  </span>
+                )}
+              </div>
             </div>
 
             {/* Clinical Rationale & Recommendation */}

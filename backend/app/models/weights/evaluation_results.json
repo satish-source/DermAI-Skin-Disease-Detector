@@ -1,0 +1,175 @@
+{
+  "model_architecture": "mobilenet_v3",
+  "is_fine_tuned": true,
+  "training_time_seconds": 29.14,
+  "dataset_split": {
+    "train_samples": 196,
+    "val_samples": 42,
+    "test_samples": 42,
+    "split_ratio": "70% / 15% / 15%"
+  },
+  "metrics": {
+    "accuracy": 0.19,
+    "balanced_accuracy": 0.133,
+    "macro_f1": 0.115,
+    "macro_precision": 0.129,
+    "macro_recall": 0.133
+  },
+  "confusion_matrix": [
+    [
+      3,
+      1,
+      0,
+      0,
+      0,
+      6,
+      0
+    ],
+    [
+      2,
+      3,
+      4,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      4,
+      0
+    ],
+    [
+      0,
+      2,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      8,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      4,
+      0,
+      0,
+      0,
+      2,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+    ]
+  ],
+  "classes": [
+    "MEL",
+    "NV",
+    "BCC",
+    "AKIEC",
+    "BKL",
+    "DF",
+    "VASC"
+  ],
+  "per_class_metrics": [
+    {
+      "class_code": "MEL",
+      "class_name": "Melanoma (Malignant)",
+      "precision": 0.6,
+      "recall_sensitivity": 0.3,
+      "specificity": 0.938,
+      "f1_score": 0.4,
+      "total_samples": 10
+    },
+    {
+      "class_code": "NV",
+      "class_name": "Melanocytic Nevus (Benign Mole)",
+      "precision": 0.167,
+      "recall_sensitivity": 0.3,
+      "specificity": 0.531,
+      "f1_score": 0.215,
+      "total_samples": 10
+    },
+    {
+      "class_code": "BCC",
+      "class_name": "Basal Cell Carcinoma (Malignant)",
+      "precision": 0.0,
+      "recall_sensitivity": 0.0,
+      "specificity": 0.895,
+      "f1_score": 0.0,
+      "total_samples": 4
+    },
+    {
+      "class_code": "AKIEC",
+      "class_name": "Actinic Keratosis (Pre-Cancerous)",
+      "precision": 0.0,
+      "recall_sensitivity": 0.0,
+      "specificity": 1.0,
+      "f1_score": 0.0,
+      "total_samples": 3
+    },
+    {
+      "class_code": "BKL",
+      "class_name": "Benign Keratosis (Seborrheic / Lentigo)",
+      "precision": 0.0,
+      "recall_sensitivity": 0.0,
+      "specificity": 1.0,
+      "f1_score": 0.0,
+      "total_samples": 8
+    },
+    {
+      "class_code": "DF",
+      "class_name": "Dermatofibroma (Benign Nodule)",
+      "precision": 0.133,
+      "recall_sensitivity": 0.333,
+      "specificity": 0.639,
+      "f1_score": 0.19,
+      "total_samples": 6
+    },
+    {
+      "class_code": "VASC",
+      "class_name": "Vascular Lesion (Angioma / Pyogenic)",
+      "precision": 0.0,
+      "recall_sensitivity": 0.0,
+      "specificity": 1.0,
+      "f1_score": 0.0,
+      "total_samples": 1
+    }
+  ],
+  "training_history": {
+    "train_loss": [
+      1.6478,
+      1.0174
+    ],
+    "val_loss": [
+      1.6962,
+      1.5687
+    ],
+    "train_acc": [
+      0.3827,
+      0.6224
+    ],
+    "val_acc": [
+      0.4048,
+      0.4048
+    ]
+  }
+}

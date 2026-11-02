@@ -111,6 +111,9 @@ class AnalysisResultOut(BaseModel):
     case_id: str
     model_name: str
     model_version: str
+    model_source: Optional[str] = None
+    neural_confidence: Optional[float] = None
+    abcde_prior_confidence: Optional[float] = None
     quality_status: str
     quality_score: float
     quality_metrics: Dict[str, Any]

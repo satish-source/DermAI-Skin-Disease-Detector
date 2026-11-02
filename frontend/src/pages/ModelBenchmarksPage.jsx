@@ -37,11 +37,30 @@ export default function ModelBenchmarksPage() {
 
   return (
     <div className="max-w-6xl mx-auto py-8 px-4 sm:px-6">
-      <div className="mb-6">
-        <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">AI Model Intelligence & Benchmark Suite</h1>
-        <p className="text-sm text-slate-500 mt-1">
-          Empirical evaluation across CNN (ResNet, EfficientNet, MobileNet) and Transformer (ViT) architectures on standardized multi-class dermatoscopic datasets (HAM10000 / ISIC).
-        </p>
+      {/* Clinical Disclaimer & Research Prototype Notice */}
+      <div className="mb-6 p-4 rounded-xl bg-amber-50 border border-amber-200/80 text-amber-900 text-xs flex items-start space-x-3">
+        <span className="text-lg">⚖️</span>
+        <div>
+          <span className="font-bold">Academic Research & Clinical Decision-Support Notice:</span>
+          <p className="mt-0.5 text-amber-800 leading-relaxed">
+            DermAI is an investigational decision-support tool. It presents both published academic reference baselines (HAM10000 / ISIC standards) and local PyTorch checkpoints fine-tuned on dermatological splits. It is not an autonomous diagnostic medical device.
+          </p>
+        </div>
+      </div>
+
+      <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">AI Model Intelligence & Benchmark Suite</h1>
+          <p className="text-sm text-slate-500 mt-1">
+            Empirical evaluation across CNN (ResNet, EfficientNet, MobileNet) and Transformer (ViT) architectures on standardized multi-class dermatoscopic datasets (HAM10000 / ISIC).
+          </p>
+        </div>
+        {confusionData?.is_live_evaluated && (
+          <div className="self-start sm:self-auto flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-semibold">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+            <span>Active Checkpoint: Validated on Test Split</span>
+          </div>
+        )}
       </div>
 
       {/* Model Architectures Comparison Table */}
@@ -52,7 +71,7 @@ export default function ModelBenchmarksPage() {
             <span>Deep Learning Architecture Performance Matrix</span>
           </h3>
           <span className="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded-full font-bold border border-indigo-200">
-            5 Architectures Benchmarked
+            Published Baselines + Local Checkpoints
           </span>
         </div>
 

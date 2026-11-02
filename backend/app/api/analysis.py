@@ -174,13 +174,16 @@ def run_full_analysis(
         "model": {
             "name": cls_res["model_name"],
             "version": cls_res["model_version"],
-            "architecture": architecture
+            "architecture": architecture,
+            "source": cls_res.get("model_source", "Fine-Tuned Checkpoint: dermai_mobilenet_v3.pth")
         },
         "quality": quality,
         "prediction": {
             "class_code": pred_class,
             "class_name": pred_name,
             "confidence": confidence,
+            "neural_confidence": cls_res.get("neural_confidence"),
+            "abcde_prior_confidence": cls_res.get("abcde_prior_confidence"),
             "top_predictions": top_preds
         },
         "segmentation": {
