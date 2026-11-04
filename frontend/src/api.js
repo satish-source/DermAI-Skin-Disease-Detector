@@ -1,17 +1,10 @@
-const getHost = () => {
-  if (typeof window !== "undefined" && window.location && window.location.hostname) {
-    return window.location.hostname;
-  }
-  return "localhost";
-};
-
-const API_BASE = `http://${getHost()}:8000/api/v1`;
-const STATIC_BASE = `http://${getHost()}:8000`;
+const API_BASE = "/api/v1";
+const STATIC_BASE = "";
 
 export const getImageUrl = (path) => {
   if (!path) return "";
   if (path.startsWith("http")) return path;
-  return `${STATIC_BASE}${path}`;
+  return path;
 };
 
 export const api = {
