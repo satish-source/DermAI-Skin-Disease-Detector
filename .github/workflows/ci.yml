@@ -7,8 +7,8 @@ on:
     branches: [ "main" ]
 
 jobs:
-  test-and-verify:
-    name: Backend Test Suite & ML Audit
+  build-and-test:
+    name: Continuous Integration & Verification
     runs-on: ubuntu-latest
 
     steps:
@@ -30,9 +30,9 @@ jobs:
 
     - name: Lint Code with Flake8
       run: |
-        # stop the build if there are Python syntax errors or undefined names
+        # Stop build if there are Python syntax errors or undefined names
         flake8 backend --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings
+        # Exit-zero treats formatting as warnings
         flake8 backend --count --exit-zero --max-complexity=15 --max-line-length=127 --statistics
 
     - name: Run Core Integration Test Suite
@@ -46,18 +46,6 @@ jobs:
         PYTHONPATH: backend
       run: |
         python backend/evaluate_fairness.py
-
-  docker-build-verification:
-    name: Docker Container Build Verification
-    runs-on: ubuntu-latest
-    needs: test-and-verify
-
-    steps:
-    - name: Checkout Codebase
-      uses: actions/checkout@v4
-
-    - name: Set up Docker Buildx
-      uses: actions/setup-buildx-action@v3
 
     - name: Validate Docker Compose Configuration
       run: |
