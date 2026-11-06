@@ -109,10 +109,13 @@ export default function ModelBenchmarksPage() {
                   <td className="py-3 px-3 font-mono text-slate-600">{m.mcc.toFixed(3)}</td>
                   <td className="py-3 px-3 font-mono text-slate-500">{m.inference_time_ms} ms</td>
                   <td className="py-3 px-3">
-                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                      m.is_active ? "bg-emerald-100 text-emerald-800 border border-emerald-300" : "bg-slate-100 text-slate-500"
+                    <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full flex items-center space-x-1 w-max ${
+                      m.deployment_status?.includes("Active") || m.is_active
+                        ? "bg-emerald-100 text-emerald-800 border border-emerald-300"
+                        : "bg-blue-100 text-blue-800 border border-blue-200"
                     }`}>
-                      {m.is_active ? "Active" : "Standby"}
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse mr-1" />
+                      <span>{m.deployment_status || "Deployed"}</span>
                     </span>
                   </td>
                 </tr>
