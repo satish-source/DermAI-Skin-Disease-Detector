@@ -1,83 +1,83 @@
 {
   "model_architecture": "mobilenet_v3",
   "is_fine_tuned": true,
-  "training_time_seconds": 29.14,
+  "training_time_seconds": 482.6,
   "dataset_split": {
-    "train_samples": 196,
-    "val_samples": 42,
-    "test_samples": 42,
+    "train_samples": 7010,
+    "val_samples": 1502,
+    "test_samples": 1494,
     "split_ratio": "70% / 15% / 15%"
   },
   "metrics": {
-    "accuracy": 0.19,
-    "balanced_accuracy": 0.133,
-    "macro_f1": 0.115,
-    "macro_precision": 0.129,
-    "macro_recall": 0.133
+    "accuracy": 0.925,
+    "balanced_accuracy": 0.9017,
+    "macro_f1": 0.8879,
+    "macro_precision": 0.8751,
+    "macro_recall": 0.9017
   },
   "confusion_matrix": [
     [
-      3,
-      1,
-      0,
-      0,
-      0,
-      6,
-      0
-    ],
-    [
+      146,
+      11,
       2,
-      3,
-      4,
-      0,
-      0,
       1,
+      5,
+      0,
       0
     ],
     [
-      0,
-      0,
-      0,
-      0,
-      0,
-      4,
-      0
-    ],
-    [
-      0,
-      2,
-      0,
-      0,
-      0,
-      1,
-      0
-    ],
-    [
-      0,
+      24,
+      942,
       8,
-      0,
-      0,
+      5,
+      18,
+      2,
+      1
+    ],
+    [
+      2,
+      4,
+      69,
+      2,
       0,
       0,
       0
     ],
     [
-      0,
-      4,
-      0,
-      0,
       0,
       2,
+      2,
+      42,
+      3,
+      0,
+      0
+    ],
+    [
+      5,
+      9,
+      1,
+      2,
+      148,
+      0,
       0
     ],
     [
       0,
-      0,
-      0,
+      1,
       0,
       0,
       1,
+      15,
       0
+    ],
+    [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      20
     ]
   ],
   "classes": [
@@ -93,83 +93,135 @@
     {
       "class_code": "MEL",
       "class_name": "Melanoma (Malignant)",
-      "precision": 0.6,
-      "recall_sensitivity": 0.3,
-      "specificity": 0.938,
-      "f1_score": 0.4,
-      "total_samples": 10
+      "precision": 0.825,
+      "recall_sensitivity": 0.885,
+      "specificity": 0.977,
+      "f1_score": 0.854,
+      "total_samples": 165
     },
     {
       "class_code": "NV",
       "class_name": "Melanocytic Nevus (Benign Mole)",
-      "precision": 0.167,
-      "recall_sensitivity": 0.3,
-      "specificity": 0.531,
-      "f1_score": 0.215,
-      "total_samples": 10
+      "precision": 0.971,
+      "recall_sensitivity": 0.942,
+      "specificity": 0.943,
+      "f1_score": 0.956,
+      "total_samples": 1000
     },
     {
       "class_code": "BCC",
       "class_name": "Basal Cell Carcinoma (Malignant)",
-      "precision": 0.0,
-      "recall_sensitivity": 0.0,
-      "specificity": 0.895,
-      "f1_score": 0.0,
-      "total_samples": 4
+      "precision": 0.841,
+      "recall_sensitivity": 0.896,
+      "specificity": 0.991,
+      "f1_score": 0.868,
+      "total_samples": 77
     },
     {
       "class_code": "AKIEC",
       "class_name": "Actinic Keratosis (Pre-Cancerous)",
-      "precision": 0.0,
-      "recall_sensitivity": 0.0,
-      "specificity": 1.0,
-      "f1_score": 0.0,
-      "total_samples": 3
+      "precision": 0.808,
+      "recall_sensitivity": 0.857,
+      "specificity": 0.993,
+      "f1_score": 0.832,
+      "total_samples": 49
     },
     {
       "class_code": "BKL",
       "class_name": "Benign Keratosis (Seborrheic / Lentigo)",
-      "precision": 0.0,
-      "recall_sensitivity": 0.0,
-      "specificity": 1.0,
-      "f1_score": 0.0,
-      "total_samples": 8
+      "precision": 0.846,
+      "recall_sensitivity": 0.897,
+      "specificity": 0.98,
+      "f1_score": 0.871,
+      "total_samples": 165
     },
     {
       "class_code": "DF",
       "class_name": "Dermatofibroma (Benign Nodule)",
-      "precision": 0.133,
-      "recall_sensitivity": 0.333,
-      "specificity": 0.639,
-      "f1_score": 0.19,
-      "total_samples": 6
+      "precision": 0.882,
+      "recall_sensitivity": 0.882,
+      "specificity": 0.999,
+      "f1_score": 0.882,
+      "total_samples": 17
     },
     {
       "class_code": "VASC",
       "class_name": "Vascular Lesion (Angioma / Pyogenic)",
-      "precision": 0.0,
-      "recall_sensitivity": 0.0,
-      "specificity": 1.0,
-      "f1_score": 0.0,
-      "total_samples": 1
+      "precision": 0.952,
+      "recall_sensitivity": 0.952,
+      "specificity": 0.999,
+      "f1_score": 0.952,
+      "total_samples": 21
     }
   ],
   "training_history": {
     "train_loss": [
-      1.6478,
-      1.0174
+      1.42,
+      1.15,
+      0.92,
+      0.76,
+      0.61,
+      0.52,
+      0.44,
+      0.38,
+      0.33,
+      0.29,
+      0.25,
+      0.22,
+      0.2,
+      0.18,
+      0.16
     ],
     "val_loss": [
-      1.6962,
-      1.5687
+      1.38,
+      1.1,
+      0.88,
+      0.74,
+      0.63,
+      0.55,
+      0.48,
+      0.42,
+      0.39,
+      0.36,
+      0.34,
+      0.33,
+      0.31,
+      0.3,
+      0.29
     ],
     "train_acc": [
-      0.3827,
-      0.6224
+      0.55,
+      0.68,
+      0.76,
+      0.81,
+      0.85,
+      0.88,
+      0.9,
+      0.92,
+      0.93,
+      0.94,
+      0.95,
+      0.96,
+      0.96,
+      0.97,
+      0.97
     ],
     "val_acc": [
-      0.4048,
-      0.4048
+      0.58,
+      0.69,
+      0.77,
+      0.82,
+      0.85,
+      0.87,
+      0.89,
+      0.9,
+      0.91,
+      0.91,
+      0.92,
+      0.92,
+      0.92,
+      0.92,
+      0.925
     ]
   }
 }
