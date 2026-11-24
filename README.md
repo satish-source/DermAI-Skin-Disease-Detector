@@ -1,10 +1,12 @@
 # DermAI: Skin Disease Detector from Mobile Images Using Deep Learning
 
 [![DermAI CI/CD](https://github.com/satish-source/DermAI-Skin-Disease-Detector/actions/workflows/ci.yml/badge.svg)](https://github.com/satish-source/DermAI-Skin-Disease-Detector/actions)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsatish-source%2FDermAI-Skin-Disease-Detector&root-directory=frontend)
 ![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.11-blue?logo=python)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.1%2B-ee4c2c?logo=pytorch)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.110-009688?logo=fastapi)
 ![React](https://img.shields.io/badge/React-18-61dafb?logo=react)
+![Vercel](https://img.shields.io/badge/Vercel-Frontend%20Ready-black?logo=vercel)
 ![Docker](https://img.shields.io/badge/Docker-Containerized-2496ed?logo=docker)
 ![AWS](https://img.shields.io/badge/AWS-EC2%20Deployed-ff9900?logo=amazon-aws)
 ![Accuracy](https://img.shields.io/badge/Benchmark%20Accuracy-94.2%25-brightgreen)

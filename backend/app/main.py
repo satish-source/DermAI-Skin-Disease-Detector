@@ -29,7 +29,7 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# Secure CORS configuration (Restricted to local development and local Wi-Fi devices)
+# Secure CORS configuration supporting local dev, mobile Wi-Fi, and Vercel cloud deployments
 ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
@@ -37,10 +37,15 @@ ALLOWED_ORIGINS = [
     "http://localhost:8000"
 ]
 
+# Allow custom origins from environment variable (e.g. Vercel deployment URL)
+custom_cors = os.getenv("CORS_ORIGINS", "")
+if custom_cors:
+    ALLOWED_ORIGINS.extend([origin.strip() for origin in custom_cors.split(",") if origin.strip()])
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
-    allow_origin_regex=r"^http:\/\/(localhost|127\.0\.0\.1|10\.\d+\.\d+\.\d+|192\.168\.\d+\.\d+)(:\d+)?$",
+    allow_origin_regex=r"^(http:\/\/(localhost|127\.0\.0\.1|10\.\d+\.\d+\.\d+|192\.168\.\d+\.\d+)(:\d+)?|https:\/\/.*\.vercel\.app)$",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
