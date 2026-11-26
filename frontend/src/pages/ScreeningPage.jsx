@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Sparkles, AlertTriangle, CheckCircle2, Cpu, ArrowRight, Loader2, Info, MapPin, Check } from "lucide-react";
 import CameraCapture from "../components/CameraCapture";
 import InteractiveBodyMap from "../components/InteractiveBodyMap";
+import ClinicalHeroBanner from "../components/ClinicalHeroBanner";
 import { api } from "../api";
 import confetti from "canvas-confetti";
 
-export default function ScreeningPage({ onAnalysisComplete, onSelectDemoCase }) {
+export default function ScreeningPage({ onAnalysisComplete, onSelectDemoCase, onOpenAuth, currentUser }) {
+  const screeningSectionRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [imageSource, setImageSource] = useState("mobile_camera");
@@ -153,8 +155,16 @@ export default function ScreeningPage({ onAnalysisComplete, onSelectDemoCase }) 
   return (
     <div className="w-full max-w-7xl mx-auto py-6 sm:py-8 px-4 sm:px-6 lg:px-8">
       
+      {/* Top Clinical AI Skin Analysis Hero Banner */}
+      <ClinicalHeroBanner
+        onStartScreening={() => screeningSectionRef.current?.scrollIntoView({ behavior: "smooth" })}
+        onSelectDemoCase={onSelectDemoCase}
+        onOpenAuth={onOpenAuth}
+        currentUser={currentUser}
+      />
+
       {/* Title & Regulatory Header */}
-      <div className="mb-6">
+      <div className="mb-6" ref={screeningSectionRef}>
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
           <div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">

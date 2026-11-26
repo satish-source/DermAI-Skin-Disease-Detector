@@ -35,6 +35,10 @@ backend/processed/*.jpg
 backend/processed/*.png
 backend/reports/*.pdf
 
+# Large Datasets
+Split_smol/
+Split_smol*
+
 # IDE & OS metadata
 .DS_Store
 Thumbs.db

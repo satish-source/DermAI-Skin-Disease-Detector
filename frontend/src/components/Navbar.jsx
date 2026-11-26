@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Activity, Bell, Shield, FileText, BarChart3, Clock, Sparkles, Smartphone, Laptop, Check } from "lucide-react";
+import { Activity, Bell, Shield, FileText, BarChart3, Clock, Sparkles, Smartphone, Laptop, Check, User, LogOut, ChevronDown, Lock, Stethoscope } from "lucide-react";
 
 export default function Navbar({
   activeTab,
@@ -11,10 +11,15 @@ export default function Navbar({
   deviceMode,
   setDeviceMode,
   onToggleChatbot,
-  isChatbotOpen
+  isChatbotOpen,
+  currentUser,
+  onOpenAuth,
+  onLogout
 }) {
   const [showNotifications, setShowNotifications] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
   const notifRef = useRef(null);
+  const userMenuRef = useRef(null);
   const unreadCount = notifications.filter(n => !n.is_read).length;
 
   const roles = [
@@ -25,11 +30,14 @@ export default function Navbar({
     { id: "admin", label: "Administrator" },
   ];
 
-  // Close notifications on outside click
+  // Close notifications & user menu on outside click
   useEffect(() => {
     function handleClickOutside(e) {
       if (notifRef.current && !notifRef.current.contains(e.target)) {
         setShowNotifications(false);
+      }
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
+        setShowUserMenu(false);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -118,8 +126,8 @@ export default function Navbar({
             </button>
           </nav>
 
-          {/* Right Controls: Device Mode Switcher, Role Selector & Notifications */}
-          <div className="flex items-center space-x-2.5">
+          {/* Right Controls: Device Switcher, Notification Bell & User Authentication */}
+          <div className="flex items-center space-x-2">
             
             {/* DermAura AI Mobile Button */}
             <button
@@ -137,7 +145,7 @@ export default function Navbar({
             </button>
             
             {/* Laptop vs Mobile Viewport Switcher */}
-            <div className="flex items-center bg-slate-100 p-0.5 rounded-lg border border-slate-200 text-slate-600">
+            <div className="hidden sm:flex items-center bg-slate-100 p-0.5 rounded-lg border border-slate-200 text-slate-600">
               <button
                 type="button"
                 onClick={() => setDeviceMode("laptop")}
@@ -149,7 +157,7 @@ export default function Navbar({
                 title="Widescreen Laptop Display Mode"
               >
                 <Laptop className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline text-[11px]">Laptop</span>
+                <span className="hidden md:inline text-[11px]">Laptop</span>
               </button>
 
               <button
@@ -163,22 +171,8 @@ export default function Navbar({
                 title="Mobile Smartphone Simulator Mode"
               >
                 <Smartphone className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline text-[11px]">Mobile</span>
+                <span className="hidden md:inline text-[11px]">Mobile</span>
               </button>
-            </div>
-
-            {/* Role Selector */}
-            <div className="flex items-center space-x-1 bg-slate-100 rounded-lg p-1 border border-slate-200">
-              <Shield className="w-3.5 h-3.5 text-slate-400 ml-1" />
-              <select
-                value={currentRole}
-                onChange={(e) => setCurrentRole(e.target.value)}
-                className="bg-transparent text-xs font-semibold text-slate-700 focus:outline-none cursor-pointer pr-1"
-              >
-                {roles.map(r => (
-                  <option key={r.id} value={r.id}>{r.label}</option>
-                ))}
-              </select>
             </div>
 
             {/* Notification Bell */}
@@ -229,6 +223,78 @@ export default function Navbar({
                 </div>
               )}
             </div>
+
+            {/* Authentication User Profile / Login Button */}
+            {currentUser ? (
+              <div className="relative" ref={userMenuRef}>
+                <button
+                  type="button"
+                  onClick={() => setShowUserMenu(!showUserMenu)}
+                  className="flex items-center space-x-2 p-1.5 pr-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 transition-all cursor-pointer shadow-2xs"
+                >
+                  <span className="w-7 h-7 rounded-lg bg-sky-100 flex items-center justify-center text-sm">
+                    {currentUser.avatar || "👤"}
+                  </span>
+                  <div className="text-left hidden sm:block">
+                    <div className="text-xs font-bold text-slate-800 leading-tight truncate max-w-[120px]">
+                      {currentUser.name}
+                    </div>
+                    <div className="text-[10px] text-sky-600 font-semibold leading-tight">
+                      {currentUser.roleTitle || "Active User"}
+                    </div>
+                  </div>
+                  <ChevronDown className="w-3 h-3 text-slate-400" />
+                </button>
+
+                {showUserMenu && (
+                  <div className="absolute right-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-slate-200 py-2 z-50 animate-in fade-in slide-in-from-top-2">
+                    <div className="px-4 py-2.5 border-b border-slate-100">
+                      <div className="font-bold text-xs text-slate-900">{currentUser.name}</div>
+                      <div className="text-[11px] text-slate-500 truncate">{currentUser.email}</div>
+                      <div className="mt-1.5 inline-flex items-center px-2 py-0.5 rounded-md bg-sky-50 border border-sky-200 text-[10px] font-bold text-sky-700">
+                        {currentUser.roleTitle}
+                      </div>
+                    </div>
+
+                    <div className="py-1">
+                      <button
+                        onClick={() => { setActiveTab("history"); setShowUserMenu(false); }}
+                        className="w-full px-4 py-2 text-left text-xs text-slate-700 hover:bg-slate-50 flex items-center space-x-2"
+                      >
+                        <FileText className="w-3.5 h-3.5 text-slate-400" />
+                        <span>My Clinical Cases</span>
+                      </button>
+                      <button
+                        onClick={() => { setActiveTab("benchmarks"); setShowUserMenu(false); }}
+                        className="w-full px-4 py-2 text-left text-xs text-slate-700 hover:bg-slate-50 flex items-center space-x-2"
+                      >
+                        <BarChart3 className="w-3.5 h-3.5 text-slate-400" />
+                        <span>AI Accuracy & Benchmarks</span>
+                      </button>
+                    </div>
+
+                    <div className="border-t border-slate-100 pt-1">
+                      <button
+                        onClick={() => { onLogout(); setShowUserMenu(false); }}
+                        className="w-full px-4 py-2 text-left text-xs text-rose-600 hover:bg-rose-50 flex items-center space-x-2 font-bold cursor-pointer"
+                      >
+                        <LogOut className="w-3.5 h-3.5 text-rose-500" />
+                        <span>Sign Out</span>
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={onOpenAuth}
+                className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-sky-600 to-indigo-600 hover:from-sky-500 hover:to-indigo-500 text-white font-bold text-xs shadow-sm flex items-center space-x-1.5 transition-all cursor-pointer"
+              >
+                <Lock className="w-3.5 h-3.5 text-sky-200" />
+                <span>Sign In</span>
+              </button>
+            )}
 
           </div>
 
