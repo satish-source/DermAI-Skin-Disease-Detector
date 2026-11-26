@@ -1,4 +1,13 @@
-# DermAI: Skin Disease Detector from Mobile Images Using Deep Learning
+# 🔬 DermAI: Skin Disease Detector from Mobile Images Using Deep Learning
+
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Website-derm--ai--skin--disease--detector.vercel.app-0284c7?style=for-the-badge&logo=vercel&logoColor=white)](https://derm-ai-skin-disease-detector.vercel.app)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-satish--source%2FDermAI-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/satish-source/DermAI-Skin-Disease-Detector)
+[![Status](https://img.shields.io/badge/Status-100%25_Live_%26_Active-10b981?style=for-the-badge)](https://derm-ai-skin-disease-detector.vercel.app)
+
+> ### 🌐 **Live Website Link**: [https://derm-ai-skin-disease-detector.vercel.app](https://derm-ai-skin-disease-detector.vercel.app)
+> **Click the link above to test the live multimodal AI skin disease detector, 4-panel Grad-CAM++ medical viewer, multilingual voice AI, and interactive dermatoscope lens.**
+
+---
 
 [![DermAI CI/CD](https://github.com/satish-source/DermAI-Skin-Disease-Detector/actions/workflows/ci.yml/badge.svg)](https://github.com/satish-source/DermAI-Skin-Disease-Detector/actions)
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsatish-source%2FDermAI-Skin-Disease-Detector&root-directory=frontend)
