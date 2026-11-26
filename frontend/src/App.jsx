@@ -81,7 +81,7 @@ export default function App() {
             original_url: details.original_image_url,
             preprocessed_url: latest.preprocessed_image_url,
             mask_url: latest.mask_image_url,
-            segmentation_overlay_url: latest.mask_image_url,
+            segmentation_overlay_url: latest.segmentation_overlay_url || latest.mask_image_url,
             heatmap_url: latest.heatmap_image_url,
             gradcam_overlay_url: latest.overlay_image_url
           },
@@ -99,13 +99,23 @@ export default function App() {
 
   const handleSelectDemoCase = async (caseNumber) => {
     try {
+      // 1. Direct match by case number or id
+      const details = await api.getCaseDetails(caseNumber);
+      if (details) {
+        handleSelectCase(details.id);
+        return;
+      }
+    } catch (_) {}
+
+    try {
+      // 2. Query listCases
       const cases = await api.listCases();
       const match = cases.find(c => c.case_number === caseNumber);
       if (match) {
         handleSelectCase(match.id);
       }
     } catch (err) {
-      console.error(err);
+      console.error("Error selecting demo case:", err);
     }
   };
 
