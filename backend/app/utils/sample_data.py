@@ -68,11 +68,7 @@ def generate_synthetic_lesion_image(path: str, lesion_type: str = "melanoma") ->
         cv2.circle(skin, (cx, cy), 60, (50, 60, 90), -1)
         skin = cv2.GaussianBlur(skin, (51, 51), 0)  # Extreme blur
 
-    # Add a couple of realistic hair strands to demonstrate DullRazor algorithm
-    if lesion_type != "blurry_poor_quality":
-        cv2.line(skin, (cx - 120, cy - 80), (cx + 110, cy + 90), (30, 25, 20), 2)
-        cv2.line(skin, (cx - 80, cy + 110), (cx + 70, cy - 90), (35, 30, 25), 2)
-
+    # Avoid drawing giant X overlays across synthetic fallback images
     Path(path).parent.mkdir(parents=True, exist_ok=True)
     cv2.imwrite(path, skin)
     return path
@@ -151,18 +147,22 @@ def seed_initial_data(db: Session):
         db.add(p2)
         db.commit()
 
-    # Generate sample image files
+    # Preserve authentic clinical sample images; generate synthetic fallbacks only if missing
     img1 = str(settings.UPLOAD_DIR / "sample_melanoma.jpg")
     img2 = str(settings.UPLOAD_DIR / "sample_nevus.jpg")
     img3 = str(settings.UPLOAD_DIR / "sample_bcc.jpg")
     img4 = str(settings.UPLOAD_DIR / "sample_blurry.jpg")
     img5 = str(settings.UPLOAD_DIR / "sample_healthy_skin.jpg")
 
-    generate_synthetic_lesion_image(img1, "melanoma")
-    generate_synthetic_lesion_image(img2, "melanocytic_nevus")
-    generate_synthetic_lesion_image(img3, "basal_cell_carcinoma")
-    generate_synthetic_lesion_image(img4, "blurry_poor_quality")
-    generate_synthetic_lesion_image(img5, "healthy_skin")
+    for img_path, lesion_type in [
+        (img1, "melanoma"),
+        (img2, "melanocytic_nevus"),
+        (img3, "basal_cell_carcinoma"),
+        (img4, "blurry_poor_quality"),
+        (img5, "healthy_skin"),
+    ]:
+        if not Path(img_path).exists():
+            generate_synthetic_lesion_image(img_path, lesion_type)
 
     cases_to_seed = [
         ("CAS-MEL-001", p1.id, "Suspicious Pigmented Macule", "Upper Back", img1, "mobile_camera", "Patient notes rapid enlargement and border irregularities over the past 3 months."),
