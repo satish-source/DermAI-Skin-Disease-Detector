@@ -7,7 +7,7 @@ import CasesHistoryPage from "./pages/CasesHistoryPage";
 import TemporalComparisonPage from "./pages/TemporalComparisonPage";
 import ModelBenchmarksPage from "./pages/ModelBenchmarksPage";
 import DermAIChatbot from "./components/DermAIChatbot";
-import AuthModal from "./components/AuthModal";
+import AuthPage from "./pages/AuthPage";
 import { api } from "./api";
 
 export default function App() {
@@ -17,7 +17,6 @@ export default function App() {
   const [currentAnalysis, setCurrentAnalysis] = useState(null);
   const [temporalCaseId, setTemporalCaseId] = useState(null);
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState(() => {
     try {
       const saved = localStorage.getItem("dermai_auth_user");
@@ -172,7 +171,7 @@ export default function App() {
           <ScreeningPage
             onAnalysisComplete={handleAnalysisComplete}
             onSelectDemoCase={handleSelectDemoCase}
-            onOpenAuth={() => setIsAuthModalOpen(true)}
+            onOpenAuth={() => setActiveTab("auth")}
             currentUser={currentUser}
           />
         );
@@ -209,6 +208,18 @@ export default function App() {
     }
   };
 
+  if (activeTab === "auth") {
+    return (
+      <AuthPage
+        onLoginSuccess={(user) => {
+          handleLoginSuccess(user);
+          setActiveTab("screening");
+        }}
+        onBack={() => setActiveTab("screening")}
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen bg-slate-100/70 flex flex-col font-sans">
       <Navbar
@@ -221,7 +232,7 @@ export default function App() {
         onToggleChatbot={() => setIsChatbotOpen(prev => !prev)}
         isChatbotOpen={isChatbotOpen}
         currentUser={currentUser}
-        onOpenAuth={() => setIsAuthModalOpen(true)}
+        onOpenAuth={() => setActiveTab("auth")}
         onLogout={handleLogout}
       />
 
@@ -323,13 +334,6 @@ export default function App() {
               }
             : null
         }
-      />
-
-      {/* Doctor & Patient Authentication Modal */}
-      <AuthModal
-        isOpen={isAuthModalOpen}
-        onClose={() => setIsAuthModalOpen(false)}
-        onLoginSuccess={handleLoginSuccess}
       />
     </div>
   );
