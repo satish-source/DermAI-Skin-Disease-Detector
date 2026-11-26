@@ -13,7 +13,6 @@ import { api } from "./api";
 export default function App() {
   const [activeTab, setActiveTab] = useState("screening");
   const [currentRole, setCurrentRole] = useState("clinician");
-  const [deviceMode, setDeviceMode] = useState("laptop"); // "laptop" or "mobile"
   const [notifications, setNotifications] = useState([]);
   const [currentAnalysis, setCurrentAnalysis] = useState(null);
   const [temporalCaseId, setTemporalCaseId] = useState(null);
@@ -219,8 +218,6 @@ export default function App() {
         setCurrentRole={setCurrentRole}
         notifications={notifications}
         onMarkAllRead={handleMarkAllRead}
-        deviceMode={deviceMode}
-        setDeviceMode={setDeviceMode}
         onToggleChatbot={() => setIsChatbotOpen(prev => !prev)}
         isChatbotOpen={isChatbotOpen}
         currentUser={currentUser}
@@ -228,40 +225,11 @@ export default function App() {
         onLogout={handleLogout}
       />
 
-      {/* Main View Container */}
-      <main className="flex-1 flex flex-col items-center justify-start w-full">
-        {isMobileScreen || deviceMode === "laptop" ? (
-          /* Native Full-Screen Responsive View (Optimized for Android smartphones, tablets & laptops) */
-          <div className="w-full pb-20 md:pb-6">
-            {renderContent()}
-          </div>
-        ) : (
-          /* Mobile Smartphone Simulator View (only on desktop when testing simulator mode) */
-          <div className="py-6 px-2 flex flex-col items-center w-full animate-in fade-in duration-300">
-            <div className="mb-2 text-xs font-semibold text-slate-500 flex items-center space-x-1.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Mobile Smartphone Device Simulation (390px Viewport)</span>
-            </div>
-
-            {/* Smartphone Outer Chassis */}
-            <div className="w-full max-w-[410px] bg-slate-900 rounded-[48px] p-3 shadow-2xl border-4 border-slate-700">
-              {/* Dynamic Island / Notch */}
-              <div className="w-full flex items-center justify-center pt-1 pb-2">
-                <div className="w-24 h-4 bg-black rounded-full" />
-              </div>
-
-              {/* Mobile Screen Body */}
-              <div className="w-full bg-slate-50 rounded-[38px] overflow-hidden max-h-[820px] overflow-y-auto border border-slate-200">
-                {renderContent()}
-              </div>
-
-              {/* Home indicator bar */}
-              <div className="w-full flex justify-center py-2">
-                <div className="w-32 h-1 bg-slate-600 rounded-full" />
-              </div>
-            </div>
-          </div>
-        )}
+      {/* Main View Container (Clean, 100% Native Responsive across all screens) */}
+      <main className="flex-1 flex flex-col items-center justify-start w-full pb-20 md:pb-6">
+        <div className="w-full">
+          {renderContent()}
+        </div>
       </main>
 
       <footer className="border-t border-slate-200 bg-white py-4 text-center text-xs text-slate-500 hidden md:block">
