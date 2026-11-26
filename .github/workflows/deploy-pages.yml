@@ -10,6 +10,10 @@ permissions:
 
 jobs:
   deploy:
+    name: Build & Publish GitHub Pages
+    environment:
+      name: github-pages
+      url: https://satish-source.github.io/DermAI-Skin-Disease-Detector/
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Codebase
