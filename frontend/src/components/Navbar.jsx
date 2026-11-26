@@ -300,34 +300,6 @@ export default function Navbar({
 
         </div>
       </div>
-
-      {/* Mobile Submenu Bar */}
-      <div className="md:hidden flex items-center justify-around border-t border-slate-200 py-1.5 bg-slate-50 text-xs">
-        <button
-          onClick={() => setActiveTab("screening")}
-          className={`py-1 px-2 font-medium ${activeTab === "screening" ? "text-sky-600 font-bold" : "text-slate-600"}`}
-        >
-          Screening
-        </button>
-        <button
-          onClick={() => setActiveTab("history")}
-          className={`py-1 px-2 font-medium ${activeTab === "history" ? "text-sky-600 font-bold" : "text-slate-600"}`}
-        >
-          History
-        </button>
-        <button
-          onClick={() => setActiveTab("temporal")}
-          className={`py-1 px-2 font-medium ${activeTab === "temporal" ? "text-sky-600 font-bold" : "text-slate-600"}`}
-        >
-          Temporal
-        </button>
-        <button
-          onClick={() => setActiveTab("benchmarks")}
-          className={`py-1 px-2 font-medium ${activeTab === "benchmarks" ? "text-sky-600 font-bold" : "text-slate-600"}`}
-        >
-          Benchmarks
-        </button>
-      </div>
     </header>
   );
 }

@@ -258,7 +258,7 @@ export default function CameraCapture({ onImageSelected, onBatchFilesSelected })
             <input
               ref={fileInputRef}
               type="file"
-              accept="image/jpeg,image/png,image/webp"
+              accept="image/*"
               className="hidden"
               onChange={handleSingleFileChange}
             />
